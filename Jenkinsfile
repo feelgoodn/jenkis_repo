@@ -18,15 +18,11 @@ pipeline {
                 }
             }
         }
-        stage('Login') {
-
-					steps {
-
-						sh 'echo nikhilkothale17 | docker login -u nikhilkothale17 --password-stdin'
-
-						}
-
-					}
+       stage('Login') {
+            steps {
+            sh 'echo nikhilkothale17 | docker login -u nikhilkothale17 --password-stdin'
+        }
+    }
 
         stage('Push image to docker hub') {
             steps {
