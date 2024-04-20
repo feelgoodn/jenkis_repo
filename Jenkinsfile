@@ -1,6 +1,7 @@
 pipeline { 
     environment {
         IMAGE = "nikhilkothale17/jenkis_cicd"
+        registryCredential = 'dockerhub'
         dockerImage = ''
     }
     agent any 
@@ -11,12 +12,6 @@ pipeline {
                 url: 'https://github.com/feelgoodn/jenkis_repo.git'
                 }
         }
-        stage('Login') {
-				steps {
-				sh 'echo nikhilkothale17 | docker login -u nikhilkothale17 --password-stdin'
-				}
-
-		}
         stage('Build') {
             steps {
                 script {
@@ -28,14 +23,16 @@ pipeline {
         stage('Push image to docker hub') {
             steps {
                     script {
+                        docker.withRegistry( '', registryCredential ) { 
                         dockerImage.push() 
+                     }
                      }
                 }
             }
 
         stage('run the docker container') {
             steps {
-                sh 'docker run -d -p 80:80 --name demo-app ${IMAGE}:latest'
+                sh 'docker run -d -p 8000:8342 --name demo-app ${IMAGE}:latest'
             }
         
         } 
