@@ -23,6 +23,7 @@ pipeline {
                     dockerImage = docker.build "${IMAGE}:latest"
             }
         }
+    }
         stage('Push image to docker hub') {
             steps {
                 script {
@@ -37,5 +38,4 @@ pipeline {
             }
         }
     }
-
 }
