@@ -7,7 +7,7 @@ pipeline {
     stages {
         stage('checkout'){
             steps {
-                git branch 'main',
+                git branch 'main'
                 url: 'https://github.com/feelgoodn/jenkis_repo.git'
             }
         }
