@@ -5,8 +5,7 @@ pipeline {
     }
     agent any
     stages {
-        stage('checkout')
-        {
+        stage('checkout'){
             steps {
                 git branch 'main',
                 url: 'https://github.com/feelgoodn/jenkis_repo.git'
@@ -24,20 +23,18 @@ pipeline {
                     dockerImage = docker.build "${IMAGE}:latest"
             }
         }
-    }
-
-    stage('Push image to docker hub') {
-        steps {
-            script {
-                dockerImage.push "${IMAGE}:latest"
+        stage('Push image to docker hub') {
+            steps {
+                script {
+                    dockerImage.push "${IMAGE}:latest"
+                }
             }
         }
-    }
-}
 
-stage('run the docker container') {
-    steps {
-        sh 'docker run -d -p 8000:8000 --name demp-app ${IMAGE}:latest'
+        stage('run the docker container') {
+            steps {
+                sh 'docker run -d -p 8000:8000 --name demp-app ${IMAGE}:latest'
+            }
         }
     }
 
