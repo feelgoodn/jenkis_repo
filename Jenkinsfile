@@ -1,7 +1,6 @@
 pipeline { 
     environment {
         IMAGE = "nikhilkothale17/jenkis_cicd"
-        registryCredential = 'dockerhub'
         dockerImage = ''
     }
     agent any 
@@ -19,13 +18,22 @@ pipeline {
                 }
             }
         }
+        stage('Login') {
+
+					steps {
+
+						sh 'echo nikhilkothale17 | docker login -u nikhilkothale17 --password-stdin'
+
+						}
+
+					}
 
         stage('Push image to docker hub') {
             steps {
                     script {
-                        docker.withRegistry( '', registryCredential ) { 
+                        
                         dockerImage.push() 
-                     }
+                     
                      }
                 }
             }
