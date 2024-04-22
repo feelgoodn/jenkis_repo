@@ -2,7 +2,7 @@ pipeline {
     environment {
         IMAGE = "nikhilkothale17/jenkis_cicd"
         dockerImage = ''
-        registryCredentials = 'dockerhub'
+        registryCredentials = 'nikhil_dockerhub'
     }
     agent any 
     stages {
