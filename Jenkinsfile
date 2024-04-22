@@ -34,7 +34,6 @@ pipeline {
             steps {
                 sh 'docker run -d -p :8342 --name demo-app ${IMAGE}:latest'
             }
-        
         } 
     }   
 }
